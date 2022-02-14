@@ -1,0 +1,7 @@
+#kaocha/v1
+{:tests    [{:id           :all
+             :source-paths ["src" "test"]
+             :ns-patterns  ["-test$"]
+             :test-paths   ["test"]}]
+
+ :reporter [kaocha.report/dots]}

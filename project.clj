@@ -7,4 +7,7 @@
   :main ^:skip-aot number-to-words.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all
-                       :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}})
+                       :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}
+             :kaocha {:dependencies [[lambdaisland/kaocha "1.62.993"]
+                                     [nubank/matcher-combinators "3.3.1"]]}}
+  :aliases {"kaocha" ["with-profile" "+kaocha" "run" "-m" "kaocha.runner"]})
