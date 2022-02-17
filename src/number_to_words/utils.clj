@@ -11,21 +11,27 @@
        (map (fn [group] (map #(Character/getNumericValue %) group)))))
 
 (defn get-after-hundreds [tens units]
-  (when (and (not-zero? tens) (not-zero? units))
-    (let [and-sentence (when (< tens 0) (< 0 units) "and")
-          raw-ten (* tens 10)]
+  (when-not (and (zero? tens) (zero? units))
+    (let [raw-ten (* tens 10)]
       (if (= tens 1)
-        (->> (+ raw-ten units)
-             n-specs/get-natural-name
-             (str and-sentence))
+        (do
+          (->> (+ raw-ten units)
+               n-specs/get-natural-name
+               #_((fn [v] (prn v) v))))
         (->> [raw-ten units]
              (map n-specs/get-natural-name)
              (filter (comp not nil?))
              (str/join " "))))))
 
-(comment
-  (letfn [
-          (group->word [power group]
+(defn get-hundreds [hundreds tens units]
+  (when-not (zero? hundreds)
+    (let [and-sentence (when (or (> tens 0) (> units 0)) "and")
+          hundreds-word (n-specs/get-natural-name hundreds)]
+      (->> [hundreds-word "hundred" and-sentence]
+           (filter (comp not nil?))
+           (str/join " " )))))
+
+(defn group->word [power group]
             (when (every? not-zero? group)
               (let [[hundreds tens units] group
                     power-complement      (n-specs/get-powers-of-tens power)
@@ -36,6 +42,10 @@
                            hundred-complement
                            (get-after-hundreds tens units)
                            power-complement]))))
+
+(comment
+  (letfn [
+
           (groups->words [groups]
             (map-indexed group->word groups))]
     (let [sample 123456780]
