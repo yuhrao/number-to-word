@@ -109,3 +109,26 @@
                     (->> test-cases
                          (map :in)
                          (map (fn [in] (apply utils/get-hundreds in))))))))))
+
+(deftest group->word
+  (testing "Should return the words with power specs"
+    (let [test-cases [(create-case [0 [0 0 1]] "one million")
+                      (create-case [1 [0 0 1]] "one thousand")
+                      (create-case [1 [0 1 1]] "eleven thousand")
+                      (create-case [2 [0 0 1]] "one")
+                      (create-case [0 [1 3 8]] "one hundred and thirty eight million")
+                      (create-case [1 [7 1 9]] "seven hundred and nineteen thousand")
+                      (create-case [2 [3 4 7]] "three hundred and forty seven")]]
+      (is (match? (map :out test-cases)
+                    (->> test-cases
+                         (map :in)
+                         (map (fn [in] (apply utils/group->words in)))))))
+    )
+  (testing "Should return nil when every number is zero"
+    (let [test-cases [(create-case [0 [0 0 0]] nil)
+                      (create-case [1 [0 0 0]] nil)
+                      (create-case [2 [0 0 0]] nil)]]
+      (is (match? (map :out test-cases)
+                  (->> test-cases
+                       (map :in)
+                       (map (fn [in] (apply utils/group->words in)))))))))

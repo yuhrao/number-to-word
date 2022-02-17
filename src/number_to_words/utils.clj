@@ -31,29 +31,23 @@
            (filter (comp not nil?))
            (str/join " " )))))
 
-(defn group->word [power group]
-            (when (every? not-zero? group)
-              (let [[hundreds tens units] group
-                    power-complement      (n-specs/get-powers-of-tens power)
-                    hundred-complement    (when (not (zero? hundreds))
-                                            "hundred")]
-                (str/join " "
-                          [(n-specs/get-natural-name hundreds)
-                           hundred-complement
-                           (get-after-hundreds tens units)
-                           power-complement]))))
+(defn group->words [power group]
+  (when-not (every? zero? group)
+    (let [[_ tens units]   group
+          power-complement (n-specs/get-powers-of-tens power)]
+      (->> [(apply get-hundreds group)
+            (get-after-hundreds tens units)
+            power-complement]
+           (filter (comp not nil?))
+           (str/join " ")))))
 
 (comment
-  (letfn [
-
-          (groups->words [groups]
-            (map-indexed group->word groups))]
-    (let [sample 123456780]
+  (letfn [(groups->words [groups]
+            (map-indexed group->words groups))]
+    (let [sample 123456000]
       (->> sample
            number->digit-groups
            groups->words
            (filter (comp not empty?))
            (str/join " and ")
-           (str/trim))))
-
-  )
+           #_(str/trim)))))

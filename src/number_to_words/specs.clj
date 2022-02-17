@@ -27,7 +27,7 @@
                              70 "seventy"
                              80 "eighty"
                              90 "ninety"}
-                   :powers-of-ten ["million" "thousand" ""]})
+                   :powers-of-ten ["million" "thousand" nil]})
 
 (defn get-natural-name [n]
   (get-in number-names [:natural n]))
