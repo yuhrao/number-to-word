@@ -38,6 +38,15 @@
            (filter (comp not nil?))
            (str/join " ")))))
 
+(defn number->words [n]
+  (if (zero? n)
+    "zero"
+    (->> n
+         number->digit-groups
+         (map-indexed group->words)
+         (filter (comp not empty?))
+         (str/join " and "))))
+
 (comment
   (letfn [(groups->words [groups]
             (map-indexed group->words groups))]
