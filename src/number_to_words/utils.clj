@@ -2,9 +2,6 @@
   (:require [number-to-words.specs :as n-specs]
             [clojure.string :as str]))
 
-(defn- not-zero? [n]
-  (not (zero? n)))
-
 (defn number->digit-groups [number]
   (->> (format "%09d" number)
        (partition 3 3)
