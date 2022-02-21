@@ -1,5 +1,5 @@
-(ns number-to-words.utils-test
-  (:require [number-to-words.utils :as utils]
+(ns number-to-words.parse-test
+  (:require [number-to-words.parse :as parse]
             [matcher-combinators.test]
             [matcher-combinators.matchers :as m]
             [clojure.test :refer [deftest testing is]]))
@@ -22,7 +22,7 @@
       (is (match? (map :out test-cases)
                   (->> test-cases
                        (map :in)
-                       (map utils/number->digit-groups)))))))
+                       (map parse/number->digit-groups)))))))
 
 (deftest get-after-hundreds
   (testing "should get words for natural tens and units"
@@ -56,7 +56,7 @@
       (is (match? (map :out test-cases)
                   (->> test-cases
                        (map :in)
-                       (map (fn [[tens units]] (prn (utils/get-after-hundreds tens units)) (utils/get-after-hundreds tens units)))))))
+                       (map (fn [[tens units]] (prn (parse/get-after-hundreds tens units)) (parse/get-after-hundreds tens units)))))))
     (testing "should get words for non natural tens and units groups"
       (let [test-cases [(create-case [2 1] "twenty one")
                         (create-case [3 2] "thirty two")
@@ -70,7 +70,7 @@
       (is (match? (map :out test-cases)
                   (->> test-cases
                        (map :in)
-                       (map (fn [[tens units]] (utils/get-after-hundreds tens units))))))))
+                       (map (fn [[tens units]] (parse/get-after-hundreds tens units))))))))
     (testing "should get words for non natural tens and units groups"
       (let [create-case (fn [digits out]
                           {:in digits :out out})
@@ -78,7 +78,7 @@
       (is (match? (map :out test-cases)
                   (->> test-cases
                        (map :in)
-                       (map (fn [[tens units]] (utils/get-after-hundreds tens units))))))))))
+                       (map (fn [[tens units]] (parse/get-after-hundreds tens units))))))))))
 
 (deftest get-hundreds
     (testing "Should return the name without 'and' sentence"
@@ -94,7 +94,7 @@
       (is (match? (map :out test-cases)
                   (->> test-cases
                        (map :in)
-                       (map (fn [in] (apply utils/get-hundreds in)))))))
+                       (map (fn [in] (apply parse/get-hundreds in)))))))
     (testing "Should return the word with 'and' sentence"
       (let [test-cases [(create-case [1 0 1] "one hundred and")
                         (create-case [2 1 0] "two hundred and")
@@ -108,7 +108,7 @@
         (is (match? (map :out test-cases)
                     (->> test-cases
                          (map :in)
-                         (map (fn [in] (apply utils/get-hundreds in))))))))))
+                         (map (fn [in] (apply parse/get-hundreds in))))))))))
 
 (deftest group->word
   (testing "Should return the words with power specs"
@@ -122,7 +122,7 @@
       (is (match? (map :out test-cases)
                     (->> test-cases
                          (map :in)
-                         (map (fn [in] (apply utils/group->words in)))))))
+                         (map (fn [in] (apply parse/group->words in)))))))
     )
   (testing "Should return nil when every number is zero"
     (let [test-cases [(create-case [0 [0 0 0]] nil)
@@ -131,4 +131,4 @@
       (is (match? (map :out test-cases)
                   (->> test-cases
                        (map :in)
-                       (map (fn [in] (apply utils/group->words in)))))))))
+                       (map (fn [in] (apply parse/group->words in)))))))))

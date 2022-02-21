@@ -1,4 +1,4 @@
-(ns number-to-words.utils
+(ns number-to-words.parse
   (:require [number-to-words.specs :as n-specs]
             [clojure.string :as str]))
 
