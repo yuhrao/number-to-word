@@ -38,7 +38,9 @@
            (filter (comp not nil?))
            (str/join " ")))))
 
-(defn number->words [n]
+(defn number->words
+  "Take a number 'n' and convert it into words"
+  [n]
   (if (zero? n)
     "zero"
     (->> n

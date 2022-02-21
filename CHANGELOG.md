@@ -1,9 +1,10 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
-
 ## 0.2.2 - 2022-02-21
 - Configured clojars deploy
+- Added first README doc
+- Added clj docs to core function
 
 ## 0.2.0 - 2022-02-21
 - Added number to word convertion
