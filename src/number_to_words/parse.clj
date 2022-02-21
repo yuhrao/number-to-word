@@ -46,14 +46,3 @@
          (map-indexed group->words)
          (filter (comp not empty?))
          (str/join " and "))))
-
-(comment
-  (letfn [(groups->words [groups]
-            (map-indexed group->words groups))]
-    (let [sample 123456000]
-      (->> sample
-           number->digit-groups
-           groups->words
-           (filter (comp not empty?))
-           (str/join " and ")
-           #_(str/trim)))))
