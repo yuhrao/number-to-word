@@ -54,6 +54,11 @@ lein kaocha --watch
 
 ## Development environment
 
+### Default profiles
+
+You need to configure your repl to start with te profiles described in the list below:
+- kaocha
+
 If you use Emacs, it's highly recommended to create a `dir-locals.el` file with the given content below:
 
 ``` emacs-lisp
