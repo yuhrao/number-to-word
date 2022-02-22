@@ -1,1 +1,3 @@
-{:linter {:unresolved-symbol {:exclude [matcher-combinators.test/match?]}}}
+{:linters
+  {:unresolved-symbol
+    {:exclude [(matcher-combinators.test [match?])]}}}
