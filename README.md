@@ -63,10 +63,10 @@ If you use Emacs, it's highly recommended to create a `dir-locals.el` file with 
 
 ## To Do
 
-- Auto generate library version based on [Semantic Versioning][semver]
-- Better namespace organizations (move core functions to their own namespaces)
-- Add better Clojure Docs
-- Configure clj-kondo to not throw errors to some forms (e.g. nubank matcher-combinators `match?`)
+- [ ] Auto generate library version based on [Semantic Versioning][semver]
+- [ ] Better namespace organizations (move core functions to their own namespaces)
+- [ ] Add better Clojure Docs
+- [x] Configure clj-kondo to not throw errors to some forms (e.g. nubank matcher-combinators `match?`)
 
 ## License
 
