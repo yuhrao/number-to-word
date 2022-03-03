@@ -1,6 +1,7 @@
 (ns number-to-words.parse
   (:require [number-to-words.client :as n-cli]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+            [number-to-words.parse :as parse]))
 
 (defn number->digit-groups [number]
   (->> (format "%09d" number)
@@ -41,7 +42,7 @@
   "Take a number 'n' and convert it into words"
   [client n]
   (if (zero? n)
-    "zero"
+    (n-cli/get-zero-case client)
     (->> n
          number->digit-groups
          (map-indexed #(group->words client %1 %2))
