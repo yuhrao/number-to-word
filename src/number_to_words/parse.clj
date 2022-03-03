@@ -1,7 +1,6 @@
 (ns number-to-words.parse
   (:require [number-to-words.client :as n-cli]
-            [clojure.string :as str]
-            [number-to-words.parse :as parse]))
+            [clojure.string :as str]))
 
 (defn number->digit-groups [number]
   (->> (format "%09d" number)
@@ -22,7 +21,7 @@
 
 (defn get-hundreds [client [hundreds tens units]]
   (when-not (zero? hundreds)
-    (let [and-sentence (when (or (> tens 0) (> units 0)) "and")
+    (let [and-sentence (when (not (every? zero? [tens units])) "and")
           hundreds-word (n-cli/get-natural-name client hundreds)]
       (->> [hundreds-word "hundred" and-sentence]
            (filter (comp not nil?))
