@@ -1,4 +1,4 @@
-(defproject io.github.yuhribernardes/number-to-words "0.2.2"
+(defproject io.github.yuhribernardes/number-to-words "1.0.0"
   :description "Library to convert number to words"
   :url "https://github.com/yuhribernardes/number-to-word"
   :license {:name "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0"
