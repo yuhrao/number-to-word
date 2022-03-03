@@ -11,10 +11,9 @@
   (when-not (and (zero? tens) (zero? units))
     (let [raw-ten (* tens 10)]
       (if (= tens 1)
-        (do
-          (->> (+ raw-ten units)
-               n-specs/get-natural-name
-               #_((fn [v] (prn v) v))))
+        (->> (+ raw-ten units)
+             n-specs/get-natural-name
+             #_((fn [v] (prn v) v)))
         (->> [raw-ten units]
              (map n-specs/get-natural-name)
              (filter (comp not nil?))
