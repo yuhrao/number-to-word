@@ -1,6 +1,6 @@
 (ns number-to-words.specs)
 
-(def number-names {:natural {1 "one"
+(def number-specs {:natural {1 "one"
                              2 "two"
                              3 "three"
                              4 "four"
@@ -30,9 +30,9 @@
                    :powers-of-ten ["million" "thousand" nil]})
 
 (defn get-natural-name [n]
-  (get-in number-names [:natural n]))
+  (get-in number-specs [:natural n]))
 
 (defn get-powers-of-tens [n]
-  (-> number-names
+  (-> number-specs
       :powers-of-ten
       (nth n)))
