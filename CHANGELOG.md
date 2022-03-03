@@ -1,7 +1,7 @@
 # Change Log
 All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
-## 1.3.0 - 2022-03-03
+## 1.0.0 - 2022-03-03
 - [BREAKING] Now the parser is a client based operation.
 - Clients are extensibles based on a language. You can create your own language specifications
 - Doc update
