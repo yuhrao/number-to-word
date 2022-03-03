@@ -11,12 +11,46 @@ A library to convert a number into words.
 
 ## Usage
 
+### Basic usage
+
 ``` clojure
 (ns my-ns
- (:require [number-to-words.parse :as ntw]))
+ (:require [number-to-words.parse :as ntw]
+           [number-to-words.client :as ntw-cli]))
  
-(ntw/number->words 123) ;;=> "one hundred and twenty three"
+(def client (ntw-cli/create :en)) ;; create a client for the desired language
+
+(ntw/number->words client 123) ;;=> "one hundred and twenty three"
 ```
+
+### Extending your own language
+
+``` clojure
+(ns my-ns
+ (:require [number-to-words.parse :as ntw]
+           [number-to-words.client :as ntw-cli]))
+
+(def my-specs (ntw-cli/assoc-lang
+               ntw-cli/specs
+               :pt
+               {:zero-case "zero"
+                :natural {1 "um"
+                          2 "dois"
+                          3 "três"
+                          4 "quatro"}
+                :pows ["milhão" "mil" nil]}))
+
+(def my-client (ntw-cli/create my-specs :pt))
+
+(ntw/number->words my-client 0) ;;=> "zero"
+(ntw/number->words my-client 1) ;;=> "um"
+(ntw/number->words my-client 2) ;;=> "dois"
+(ntw/number->words my-client 3) ;;=> "três"
+(ntw/number->words my-client 4) ;;=> "quatro"
+```
+
+## Supported language
+- English (`:en`)
 
 ## Deploy
 
